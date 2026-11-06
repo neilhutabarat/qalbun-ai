@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Finance AI</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- jsPDF untuk Download PDF Otomatis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased pb-20 select-none">
+
+    <!-- TOP BAR -->
+    <header class="bg-white border-b border-gray-100 sticky top-0 z-40 px-4 py-3 flex justify-between items-center shadow-sm">
+        <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-sm shadow">
+                <i data-lucide="wallet" class="w-4 h-4"></i>
+            </div>
+            <div>
+                <h1 id="txt-app-name" class="font-bold text-base text-gray-900 leading-tight">Qalbun Finance AI</h1>
+                <p id="txt-business-name" class="text-xs text-emerald-700 font-medium">Qalbun Salim</p>
+            </div>
+        </div>
+        <button onclick="openApiKeyModal()" class="p-2 rounded-full hover:bg-gray-100 text-gray-500">
+            <i data-lucide="settings" class="w-5 h-5"></i>
+        </button>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-md mx-auto px-4 pt-4">
+
+        <!-- TAB 1: DASHBOARD -->
+        <section id="tab-dashboard" class="space-y-4">
+            <!-- Greeting -->
+            <div>
+                <h2 class="text-xl font-bold text-gray-900">Hello <span id="txt-owner-name">Neil</span>,</h2>
+                <p class="text-xs text-gray-500">Berikut ringkasan laporan laba rugi Anda</p>
+            </div>
+
+            <!-- Card Total Laba Bersih -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+                <div class="flex items-center justify-between text-xs text-gray-500 mb-1">
+                    <span class="flex items-center space-x-1">
+                        <span>Total Laba Bersih</span>
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-500"></i>
+                    </span>
+                    <span class="text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full flex items-center text-[10px]">
+                        <i data-lucide="trending-up" class="w-3 h-3 mr-0.5"></i> +12%
+                    </span>
+                </div>
+                <div id="val-net-profit" class="text-3xl font-extrabold text-emerald-700 tracking-tight">
+                    Rp 600.000
+                </div>
+                <p class="text-[11px] text-gray-400 mt-1">Bulan November 2026 • Terhitung otomatis</p>
+            </div>
+
+            <!-- 3 Kolom Metrik: Pendapatan, HPP, Beban -->
+            <div class="grid grid-cols-3 gap-2.5">
+                <div class="bg-white p-3 rounded-xl border border-gray-100 shadow-sm text-center">
+                    <span class="text-[11px] text-gray-400 block mb-1">Pendapatan</span>
+                    <span id="val-income" class="text-xs font-bold text-gray-800 block">Rp 3.500.000</span>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-gray-100 shadow-sm text-center">
+                    <span class="text-[11px] text-gray-400 block mb-1">HPP</span>
+                    <span id="val-cogs" class="text-xs font-bold text-orange-600 block">Rp 1.200.000</span>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-gray-100 shadow-sm text-center">
+                    <span class="text-[11px] text-gray-400 block mb-1">Beban</span>
+                    <span id="val-expense" class="text-xs font-bold text-rose-600 block">Rp 1.700.000</span>
+                </div>
+            </div>
+
+            <!-- Rumus Akuntansi Card -->
+            <div class="bg-gray-900 text-gray-200 p-4 rounded-xl text-xs space-y-2 shadow">
+                <div class="flex items-center space-x-2 text-emerald-400 font-semibold">
+                    <i data-lucide="calculator" class="w-4 h-4"></i>
+                    <span>Alur Standar Akuntansi:</span>
+                </div>
+                <p class="text-[11px] text-gray-300 leading-relaxed font-mono">
+                    Pendapatan (Rp 3.500.000) - HPP (Rp 1.200.000) = <strong class="text-emerald-400">Laba Kotor Rp 2.300.000</strong><br>
+                    Laba Kotor - Beban (Rp 1.700.000) = <strong class="text-emerald-400">Laba Bersih Rp 600.000</strong>
+                </p>
+            </div>
+
+            <!-- AI Insight Card -->
+            <div class="bg-emerald-50/80 border border-emerald-200/60 rounded-xl p-4">
+                <div class="flex items-center space-x-2 mb-2">
+                    <span class="bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">AI Insight</span>
+                    <span class="text-xs font-semibold text-emerald-950">Analisis Performa Usaha</span>
+                </div>
+                <p id="txt-ai-insight" class="text-xs text-emerald-900 leading-relaxed">
+                    "Profit stabil di angka 17%. Namun beban Herba naik 20% dibanding bulan lalu. Pertimbangkan mencari supplier alternatif untuk mengoptimalkan margin laba."
+                </p>
+            </div>
+
+            <!-- Quick Action Tombol Scan Struk -->
+            <button onclick="switchTab('scan')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-600/20 flex items-center justify-center space-x-2 transition">
+                <i data-lucide="camera" class="w-5 h-5"></i>
+                <span>Foto & Scan Struk Belanja</span>
+            </button>
+        </section>
+
+        <!-- TAB 2: SCAN STRUK (AI CLASSIFIER) -->
+        <section id="tab-scan" class="hidden space-y-4">
+            <div>
+                <h2 class="text-xl font-bold text-gray-900">Input Struk Pakai AI</h2>
+                <p class="text-xs text-gray-500">Unggah foto struk untuk klasifikasi otomatis</p>
+            </div>
+
+            <!-- Upload Area -->
+            <div onclick="document.getElementById('receipt-file').click()" class="border-2 border-dashed border-emerald-300 bg-emerald-50/40 rounded-2xl p-6 text-center cursor-pointer hover:bg-emerald-50 transition relative overflow-hidden">
+                <input type="file" id="receipt-file" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+                <div id="preview-placeholder">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="upload-cloud" class="w-6 h-6"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-700">Ketuk untuk Pilih Foto Struk</p>
+                    <p class="text-xs text-gray-400 mt-1">Struk nota beli herba, struk listrik, atau nota sewa</p>
+                </div>
+                <img id="image-preview" class="hidden w-full h-48 object-cover rounded-xl mx-auto shadow-sm" alt="Preview Struk">
+            </div>
+
+            <!-- Loading Spinner AI -->
+            <div id="ai-loading" class="hidden text-center py-4 bg-white rounded-xl border border-gray-100 p-4">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-emerald-600 border-t-transparent mb-2"></div>
+                <p class="text-xs font-semibold text-emerald-800">AI sedang memindai & mengklasifikasi struk...</p>
+                <p class="text-[10px] text-gray-400">Mendeteksi nama toko, tanggal, nominal, dan pos akun</p>
+            </div>
+
+            <!-- Form Hasil Klasifikasi AI -->
+            <div id="scan-form" class="bg-white p-4 rounded-xl border border-gray-100 space-y-3 shadow-sm">
+                <div class="bg-emerald-50 text-emerald-800 text-xs px-3 py-2 rounded-lg flex items-center space-x-2">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600"></i>
+                    <span class="font-medium">AI mendeteksi data struk (Akurasi 98%)</span>
+                </div>
+
+                <div>
+                    <label class="text-[11px] font-semibold text-gray-500 block mb-1">Kategori Akuntansi</label>
+                    <select id="form-category" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 text-xs font-medium focus:ring-2 focus:ring-emerald-500 outline-none">
+                        <option value="cogs">HPP (Bahan / Stok / Herba)</option>
+                        <option value="expense">Beban Operasional (Listrik/Gaji/Sewa)</option>
+                        <option value="income">Pendapatan (Jasa/Penjualan)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="text-[11px] font-semibold text-gray-500 block mb-1">Nominal (Rp)</label>
+                    <input type="number" id="form-amount" value="200000" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 text-xs font-bold text-gray-900 focus:ring-2 focus:ring-emerald-500 outline-none">
+                </div>
+
+                <div>
+                    <label class="text-[11px] font-semibold text-gray-500 block mb-1">Deskripsi Transaksi</label>
+                    <input type="text" id="form-desc" value="Beli Stok Minyak Herba & Cup Bekam" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 text-xs focus:ring-2 focus:ring-emerald-500 outline-none">
+                </div>
+
+                <button onclick="saveTransaction()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-lg text-xs shadow transition">
+                    Simpan & Update Laporan
+                </button>
+            </div>
+        </section>
+
+        <!-- TAB 3: LAPORAN & PDF -->
+        <section id="tab-report" class="hidden space-y-4">
+            <div>
+                <h2 class="text-xl font-bold text-gray-900">Laporan Laba Rugi</h2>
+                <p id="txt-report-period" class="text-xs text-gray-500">Periode: November 2026</p>
+            </div>
+
+            <!-- Kartu Laporan Resmi -->
+            <div id="report-card" class="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm space-y-3">
+                <div class="border-b pb-3">
+                    <h3 id="txt-report-biz" class="font-bold text-gray-900 text-sm">Qalbun Salim</h3>
+                    <p class="text-[10px] text-gray-400">Laporan Resmi Sesuai Standar Akuntansi</p>
+                </div>
+
+                <div class="space-y-2 text-xs">
+                    <div class="flex justify-between items-center py-1">
+                        <span class="text-gray-600 font-medium">1. Pendapatan</span>
+                        <span id="rep-income" class="font-bold text-gray-900">Rp 3.500.000</span>
+                    </div>
+                    <div class="flex justify-between items-center py-1">
+                        <span class="text-gray-600 font-medium">2. HPP</span>
+                        <span id="rep-cogs" class="font-bold text-orange-600">Rp 1.200.000</span>
+                    </div>
+                    <div class="border-t border-dashed my-1"></div>
+                    <div class="flex justify-between items-center py-1 bg-emerald-50/50 px-2 rounded">
+                        <span class="font-bold text-emerald-900">Laba Kotor</span>
+                        <span id="rep-gross" class="font-bold text-emerald-800">Rp 2.300.000</span>
+                    </div>
+                    <div class="flex justify-between items-center py-1">
+                        <span class="text-gray-600 font-medium">3. Beban Operasional</span>
+                        <span id="rep-expense" class="font-bold text-rose-600">Rp 1.700.000</span>
+                    </div>
+                    <div class="border-t-2 border-gray-900 my-1"></div>
+                    <div class="flex justify-between items-center py-2 bg-emerald-100/70 px-2 rounded-lg">
+                        <span class="font-extrabold text-emerald-950 text-sm">Laba Bersih</span>
+                        <span id="rep-net" class="font-extrabold text-emerald-900 text-sm">Rp 600.000</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tombol Download PDF & Share -->
+            <div class="grid grid-cols-2 gap-3 pt-2">
+                <button onclick="generatePDF()" class="w-full bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-semibold py-3 px-3 rounded-xl text-xs flex items-center justify-center space-x-2 shadow-sm transition">
+                    <i data-lucide="download" class="w-4 h-4 text-emerald-600"></i>
+                    <span>Download PDF</span>
+                </button>
+                <button onclick="shareReport()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-3 rounded-xl text-xs flex items-center justify-center space-x-2 shadow-sm transition">
+                    <i data-lucide="share-2" class="w-4 h-4"></i>
+                    <span>Share WhatsApp</span>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- BOTTOM NAVIGATION BAR (Mac/One UI Style) -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-gray-200 py-2 px-6 flex justify-around items-center z-50">
+        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="flex flex-col items-center text-emerald-600 focus:outline-none">
+            <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+            <span class="text-[10px] font-semibold mt-1">Dashboard</span>
+        </button>
+        <button onclick="switchTab('scan')" id="nav-scan" class="flex flex-col items-center text-gray-400 hover:text-emerald-600 focus:outline-none">
+            <i data-lucide="camera" class="w-5 h-5"></i>
+            <span class="text-[10px] font-semibold mt-1">Scan Struk</span>
+        </button>
+        <button onclick="switchTab('report')" id="nav-report" class="flex flex-col items-center text-gray-400 hover:text-emerald-600 focus:outline-none">
+            <i data-lucide="file-text" class="w-5 h-5"></i>
+            <span class="text-[10px] font-semibold mt-1">Laporan</span>
+        </button>
+    </nav>
+
+    <!-- MODAL API KEY & SETTINGS -->
+    <div id="modal-api-key" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-sm rounded-2xl p-5 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-gray-900 text-sm">Pengaturan & Kunci AI</h3>
+                <button onclick="closeApiKeyModal()" class="text-gray-400 hover:text-gray-600">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <p class="text-xs text-gray-500">
+                Masukkan Google Gemini API Key jika Anda ingin aplikasi langsung otomatis menganalisis struk nyata secara mandiri tanpa coding.
+            </p>
+            <input type="password" id="input-api-key" placeholder="AIzaSy..." class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-emerald-500">
+            <div class="flex space-x-2">
+                <button onclick="saveApiKey()" class="flex-1 bg-emerald-600 text-white font-semibold py-2.5 rounded-lg text-xs">Simpan</button>
+                <button onclick="closeApiKeyModal()" class="px-4 bg-gray-100 text-gray-600 font-semibold py-2.5 rounded-lg text-xs">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

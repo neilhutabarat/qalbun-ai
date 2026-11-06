@@ -1,0 +1,41 @@
+========================================================================
+PANDUAN MASTER TEMPLATE: APLIKASI LABA RUGI AI (SIAP JUAL PUTUS)
+========================================================================
+
+Halo! Anda TIDAK PERLU bisa coding sama sekali untuk memakai dan menjual aplikasi ini.
+Semua sistem, antarmuka, rumus akuntansi, scan struk AI, tombol Download PDF, 
+dan Share WhatsApp sudah dibuatkan lengkap 100% di dalam file ini.
+
+------------------------------------------------------------------------
+1. CARA MEMBUKA & MENJALANKAN APLIKASI (LANGSUNG PAKAI):
+------------------------------------------------------------------------
+- Cukup buka file "index.html" di laptop atau HP Anda (klik 2x, buka pakai Chrome/Safari/Edge).
+- Aplikasi langsung berjalan normal, offline, tanpa perlu instal server apapun.
+
+------------------------------------------------------------------------
+2. CARA GANTI NAMA PERUSAHAAN SAAT ADA PEMBELI BARU (WHITE-LABEL):
+------------------------------------------------------------------------
+Setiap kali ada yang beli (misal namanya Toko Sejahtera):
+1. Copy folder "Qalbun_Finance_AI_Master" ini jadi folder baru.
+2. Buka file: "js/config.js" menggunakan NOTEPAD (klik kanan -> Open with -> Notepad).
+3. Anda hanya perlu ganti tulisan di baris ini:
+   
+   appName: "Qalbun Finance AI",      <-- Ganti jadi nama aplikasi pembeli
+   businessName: "Qalbun Salim",      <-- Ganti jadi nama toko pembeli
+   ownerName: "Neil",                 <-- Ganti jadi nama pemiliknya
+
+4. Simpan (Save) Notepad tersebut. SELESAI!
+   Saat "index.html" dibuka, semua tulisan di Dashboard, Laporan, dan PDF
+   otomatis langsung berganti sesuai nama toko baru tersebut.
+
+------------------------------------------------------------------------
+3. CARA JADIKAN FILE .APK ANDROID (GRATIS & TANPA CODING):
+------------------------------------------------------------------------
+Jika pembeli minta file mentahan .APK untuk diinstall di HP Android:
+1. Masuk ke situs gratis: https://www.pwabuilder.com atau https://web2apk.com
+2. Masukkan link web atau upload file ini.
+3. Klik tombol "Generate APK".
+4. File APK langsung jadi dan tinggal Anda kirimkan ke pembeli lewat WhatsApp/Google Drive.
+
+Semua beres dan siap dijual putus!
+========================================================================
